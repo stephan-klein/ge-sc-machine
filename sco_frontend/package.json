@@ -14,7 +14,7 @@
     "react": "^17.0.2",
     "react-apexcharts": "^1.4.0",
     "react-dom": "^17.0.2",
-    "react-force-graph": "^1.41.12",
+    "react-force-graph": "1.41.12",
     "react-github-corner": "^2.5.0",
     "react-loading-overlay": "^1.0.1",
     "react-popup-alert": "^1.0.7",
@@ -24,6 +24,17 @@
     "styled-components": "^4.3.2",
     "web-vitals": "^1.0.1"
   },
+
+  "resolutions": {
+    "3d-force-graph": "1.70.13",
+    "3d-force-graph-vr": "2.0.15",
+    "three-render-objects": "1.27.3",
+    "three-forcegraph": "1.39.5",
+    "three": "0.144.0",
+    "force-graph": "1.42.13",
+    "react-kapsule": "2.2.5"
+  },
+  
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
