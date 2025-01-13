@@ -9,6 +9,16 @@
 <img src="./assets/MANDO_GURU.png" alt="MANDO GURU Logo" width="225" height="225" class="center">
 </p>
 
+# About the Fork
+This project was forked from [Mando-Project](https://github.com/MANDO-Project/ge-sc-machine) to evaluate the model independently (See https://github.com/stephan-klein/mlsc)
+
+It includes minor infrastructural changes to be able to run it in 2025.
+
+List of changes:
+- Tested successfully with node v18
+- Upgrade dependencies to torch 1.9 st this project runs in same environment as [ge-sc] (https://github.com/MANDO-Project/ge-sc-machine).
+- In react app's package.json lock certain older dependencies of react-force-graph s.t `yarn start` does not end in an ECMAScript Error
+
 # Overview
 This project was created to bring out the APIs of vulnerability detection for smart contracts based on heterogeneous graph embeddings.
 <p align="center">
