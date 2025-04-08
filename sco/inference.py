@@ -30,11 +30,10 @@ CATEGORIES_OF_HEATMAP = 15
 def main(argv):
     parser = argparse.ArgumentParser(description='Smart contract vulnerability detection')
     parser.add_argument('solidity_file', type=str, help='Path to the Solidity file to analyze')
-    parser.add_argument('-b', '--bugtypes', type=str, help='Comma separated list of bug types to check')
+    parser.add_argument('-b', '--bugtypes', type=str, help='Comma separated list of bug types to check: ' + ', '.join(NODE_MODEL_OPTS.keys()))
     parser.add_argument('-v', '--verbose', action='store_true', help='Show verbose output with full details')
     
 
-    
     # Handle both direct sys.argv passing and argparse
     if len(argv) > 1 and argv[1].startswith('-'):
         args = parser.parse_args(argv)
