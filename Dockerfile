@@ -24,4 +24,4 @@ COPY . /app
 RUN pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/lts/1.8/cpu -f https://data.dgl.ai/wheels/repo.html
 
 # CMD ["uvicorn", "--host", "0.0.0.0", "--port", "5000", "sco.main:app"]
-CMD ["python", "-m", "sco", "--host", "0.0.0.0", "--port", "5555"]
+# CMD ["python", "-m", "sco", "--host", "0.0.0.0", "--port", "5555"]

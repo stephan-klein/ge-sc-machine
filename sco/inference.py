@@ -2,12 +2,16 @@ import sys
 import os
 import json
 import argparse
+import signal
 from time import time
+from datetime import datetime  # added for timestamp
 
+from logbook import Logger, StreamHandler
+logger = Logger(__name__)
+print(f"[{datetime.now()}] MANDO Initializing")  # modified to include timestamp
 import networkx as nx
 import torch
 from torch import nn
-from logbook import Logger, StreamHandler
 
 from .common.utils import check_gpu, get_node_ids, get_binary_mask, \
                             get_line_numbers, get_edges, \
@@ -22,23 +26,33 @@ from .config import GRAPH_MODEL_OPTS
 torch.manual_seed(1)
 # Set up the StreamHandler to output logs to stdout
 StreamHandler(sys.stdout).push_application()
-logger = Logger(__name__)
+
 CATEGORIES_OF_HEATMAP = 15
 
 # is_gpu = check_gpu()
+
+def timeout_handler(signum, frame):
+    """Handle timeout signal by exiting gracefully with a message."""
+    print(f"Result: {json.dumps({'messages': 'Execution timed out. Consider increasing the timeout with the -t/--timeout option.'})}")
+    sys.exit(1)
 
 def main(argv):
     parser = argparse.ArgumentParser(description='Smart contract vulnerability detection')
     parser.add_argument('solidity_file', type=str, help='Path to the Solidity file to analyze')
     parser.add_argument('-b', '--bugtypes', type=str, help='Comma separated list of bug types to check: ' + ', '.join(NODE_MODEL_OPTS.keys()))
     parser.add_argument('-v', '--verbose', action='store_true', help='Show verbose output with full details')
+    parser.add_argument('-t', '--timeout', type=int, default=1800, help='Timeout in seconds (default: 1800 - 30 minutes)')
     
-
     # Handle both direct sys.argv passing and argparse
     if len(argv) > 1 and argv[1].startswith('-'):
         args = parser.parse_args(argv)
     else:
         args = parser.parse_args([argv[1]] + argv[2:] if len(argv) > 1 else [])
+    
+    # Set up the timeout handler
+    signal.signal(signal.SIGALRM, timeout_handler)
+    signal.alarm(args.timeout)
+    logger.info(f"Setting execution timeout to {args.timeout} seconds")
     
     sm_path = args.solidity_file
     verbose = args.verbose
@@ -58,11 +72,11 @@ def main(argv):
     # Generate graphs from provided smart contract file    
     cfg_graph = generate_cfg(sm_path)
     if cfg_graph is None:
-        print(json.dumps({'messages': 'Found an illegal solidity smart contract'}))
+        print(f"Result: {json.dumps({'messages': 'Found an illegal solidity smart contract'})}")
         sys.exit(1)
     cg_graph = generate_cg(sm_path)
     if cg_graph is None:
-        print(json.dumps({'messages': 'Found an illegal solidity smart contract'}))
+        print(f"Result: {json.dumps({'messages': 'Found an illegal solidity smart contract'})}")
         sys.exit(1)
     cfg_cg_graph = combine_cfg_cg(cfg_graph, cg_graph)
 
