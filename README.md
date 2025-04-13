@@ -15,7 +15,9 @@ This project was forked from [Mando-Project](https://github.com/MANDO-Project/ge
 It includes minor infrastructural changes to be able to run it in 2025.
 
 List of changes:
-- [Smartbugs](https://github.com/smartbugs/smartbugs) integration, by supplying a command line script `inference.py` / `inference.sh` using logic from nodetype endpoint but providing some additional processing option. Use `inference.sh --help` for details.
+- [Smartbugs](https://github.com/smartbugs/smartbugs) integration
+  - Add command line scripts `inference.py` / `inference.sh` using logic from nodetype endpoint but providing some additional processing option. Use `inference.sh --help` for details.
+  - Dockerfile: Remove entrypoint, it will be defined by smartbugs
 - Frontend: In react app's package.json lock certain older dependencies of react-force-graph s.t `yarn start` does not end in an ECMAScript Error
 
 # Overview
