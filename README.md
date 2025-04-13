@@ -16,8 +16,6 @@ It includes minor infrastructural changes to be able to run it in 2025.
 
 List of changes:
 - [Smartbugs](https://github.com/smartbugs/smartbugs) integration, by supplying a command line script `inference.py` / `inference.sh` using logic from nodetype endpoint but providing some additional processing option. Use `inference.sh --help` for details.
-- Tested successfully with node v18
-- Backend: Upgrade dependencies to torch 1.9 st this project runs in same environment as [ge-sc] (https://github.com/MANDO-Project/ge-sc-machine).
 - Frontend: In react app's package.json lock certain older dependencies of react-force-graph s.t `yarn start` does not end in an ECMAScript Error
 
 # Overview
