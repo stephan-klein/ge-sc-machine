@@ -73,8 +73,10 @@ class HGTLayer(nn.Module):
         with G.local_scope():
             node_dict, edge_dict = self.node_dict, self.edge_dict
             for srctype, etype, dsttype in G.canonical_etypes:
-                sub_graph = G[srctype, etype, dsttype]
                 canonical_etype = (srctype, etype, dsttype)
+                if canonical_etype not in self.edge_dict:
+                    continue
+                sub_graph = G[srctype, etype, dsttype]
                 k_linear = self.k_linears[node_dict[srctype]]
                 v_linear = self.v_linears[node_dict[srctype]]
                 q_linear = self.q_linears[node_dict[dsttype]]
@@ -222,10 +224,6 @@ class HGTVulNodeClassifier(nn.Module):
         nx_graph = nx.convert_node_labels_to_integers(nx_graph)
         nx_graph = add_hetero_ids(nx_graph)
         nx_g_data = generate_hetero_graph_data(nx_graph)
-
-        for etype in nx_g_data.keys():
-            if etype not in self.etypes_dict:
-                self.etypes_dict[etype] = len(self.etypes_dict)
 
         # Get Node Labels
         node_labels, labeled_node_ids, label_ids = get_node_label(nx_graph)
@@ -401,10 +399,6 @@ class HGTVulGraphClassifier(nn.Module):
         nx_graph = nx.convert_node_labels_to_integers(nx_graph)
         nx_graph = add_hetero_ids(nx_graph)
         nx_g_data = generate_hetero_graph_data(nx_graph)
-
-        for etype in nx_g_data.keys():
-            if etype not in self.etypes_dict:
-                self.etypes_dict[etype] = len(self.etypes_dict)
         # Get node ids
         node_ids_dict = get_node_ids_dict(nx_graph)
         node_ids_by_filename = get_node_ids_by_filename(nx_graph)
