@@ -4,6 +4,11 @@ from os.path import join
 
 
 def get_solc_compiler(source):
+    # Check if SOLC_BIN environment variable is set
+    solc_bin = os.getenv('SOLC_BIN')
+    if solc_bin:
+        return solc_bin
+    
     PATTERN = re.compile(r"pragma solidity\s*(?:\^|>=|<=)?\s*(\d+\.\d+\.\d+)")
     solc_select = './sco/.solc-select/artifacts'
     solc_version = [v.split('-')[-1] for v in os.listdir(solc_select)]
