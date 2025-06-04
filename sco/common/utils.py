@@ -1,9 +1,11 @@
 import torch
 from logbook import Logger
 
-# from ..sco_models.model_hgt import HGTVulNodeClassifier
-from ..sco_models.model_mando import MANDONodeClassifier as NodeClassifier
-from ..sco_models.model_mando import MANDOGraphClassifier as GraphClassifier
+from ..sco_models.model_hgt import HGTVulNodeClassifier as NodeClassifier
+from ..sco_models.model_hgt import HGTVulGraphClassifier as GraphClassifier
+
+# from ..sco_models.model_mando import MANDONodeClassifier as NodeClassifier
+# from ..sco_models.model_mando import MANDOGraphClassifier as GraphClassifier
 
 logger = Logger(__name__)
 torch.manual_seed(1)
