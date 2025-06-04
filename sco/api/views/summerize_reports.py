@@ -4,7 +4,7 @@ from time import time
 import networkx as nx
 import torch
 from torch import nn
-from logbook import Logger
+import logging
 from fastapi import APIRouter, Security
 
 from ...auth import get_api_key
@@ -24,7 +24,7 @@ from ...config import GRAPH_MODEL_OPTS
 
 
 torch.manual_seed(1)
-logger = Logger(__name__)
+logger = logging.getLogger(__name__)
 router = APIRouter()
 CATEGORIES_OF_HEATMAP = 15
 
@@ -70,7 +70,7 @@ async def extra_detect_line_level_bugs(data: ContractRequest,
             try:
                 logits = graph_model.extend_forward(extra_graph, [sm_name])
             except Exception as e:
-                logger.info(e)
+                logger.exception("Found non-existent nodes/edges in the graph!")
                 return {'messages': 'Found non-existent nodes/edges in the graph!'}
             graph_preds = nn.functional.softmax(logits, dim=1)
             _, indices = torch.max(graph_preds, dim=1)
@@ -89,7 +89,7 @@ async def extra_detect_line_level_bugs(data: ContractRequest,
             try:
                 logits, _ = node_model.extend_forward(extra_graph)
             except Exception as e:
-                logger.info(e)
+                logger.exception("Found non-existent nodes/edges!")
                 return {'messages': 'Found non-existent nodes/edges!'}
             file_mask = get_binary_mask(len(extra_graph), file_ids)
             node_preds = logits[file_mask]
