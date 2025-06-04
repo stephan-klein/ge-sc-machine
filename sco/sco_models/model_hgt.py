@@ -223,6 +223,10 @@ class HGTVulNodeClassifier(nn.Module):
         nx_graph = add_hetero_ids(nx_graph)
         nx_g_data = generate_hetero_graph_data(nx_graph)
 
+        for etype in nx_g_data.keys():
+            if etype not in self.etypes_dict:
+                self.etypes_dict[etype] = len(self.etypes_dict)
+
         # Get Node Labels
         node_labels, labeled_node_ids, label_ids = get_node_label(nx_graph)
         node_ids_dict = get_node_ids_dict(nx_graph)
@@ -397,6 +401,10 @@ class HGTVulGraphClassifier(nn.Module):
         nx_graph = nx.convert_node_labels_to_integers(nx_graph)
         nx_graph = add_hetero_ids(nx_graph)
         nx_g_data = generate_hetero_graph_data(nx_graph)
+
+        for etype in nx_g_data.keys():
+            if etype not in self.etypes_dict:
+                self.etypes_dict[etype] = len(self.etypes_dict)
         # Get node ids
         node_ids_dict = get_node_ids_dict(nx_graph)
         node_ids_by_filename = get_node_ids_by_filename(nx_graph)
