@@ -68,8 +68,8 @@ class GRAPH_CLASSIFIER_CONFIG_FRONT_RUNNING(str, Enum):
 
 
 class GRAPH_CLASSIFIER_CONFIG_REENTRANCY(str, Enum):
-    CHECKPOINT = join(BASE_PATH, './models/graph_detection/nodetype/reentrancy_hgt.pth')
-    COMPRESSED_GRAPH = join(BASE_PATH, './graphs/graph_detection/reentrancy_cfg_cg_compressed_graphs.gpickle')
+    CHECKPOINT = join(BASE_PATH, './models/graph_detection/nodetype/reentrancy_hgt_cgt.pth')
+    COMPRESSED_GRAPH = join(BASE_PATH, './graphs/graph_detection/reentrancy_cgt_cfg_cg_compressed_graphs.gpickle')
 
 
 class GRAPH_CLASSIFIER_CONFIG_TIME_MANIPULATION(str, Enum):
