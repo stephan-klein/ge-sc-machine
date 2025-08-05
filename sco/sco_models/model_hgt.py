@@ -74,6 +74,8 @@ class HGTLayer(nn.Module):
             node_dict, edge_dict = self.node_dict, self.edge_dict
             for srctype, etype, dsttype in G.canonical_etypes:
                 canonical_etype = (srctype, etype, dsttype)
+                
+                # Ignore KeyError in case an edge type is not present in the prepared graph 
                 if canonical_etype not in self.edge_dict:
                     continue
                 sub_graph = G[srctype, etype, dsttype]
