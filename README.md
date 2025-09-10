@@ -18,6 +18,8 @@ It provides the following changes, predominantly for integration into [SmartBugs
 - Improved exception handling
 - Frontend: In react app's package.json lock certain older dependencies of react-force-graph s.t `yarn start` does not end in an ECMAScript Error
 
+Docker Image published at `deet0x/mando:0.1`
+
 # Overview
 This project was created to bring out the APIs of vulnerability detection for smart contracts based on heterogeneous graph embeddings.
 <p align="center">
