@@ -10,14 +10,12 @@
 </p>
 
 # About the Fork
-This project was forked from [Mando-Project](https://github.com/MANDO-Project/ge-sc-machine) to evaluate the model independently (See https://github.com/stephan-klein/mlsc)
+This project was forked from [Mando-Project](https://github.com/MANDO-Project/ge-sc-machine) for independent evaluation as part of master thesis "Machine Learning for Vulnerability Detection in Smart Contracts A Comparison of Approaches".
 
-It includes minor infrastructural changes to be able to run it in 2025.
-
-List of changes:
-- [Smartbugs](https://github.com/smartbugs/smartbugs) integration
-  - Add command line scripts `inference.py` / `inference.sh` using logic from nodetype endpoint but providing some additional processing option. Use `inference.sh --help` for details.
-  - Dockerfile: Remove entrypoint, it will be defined by smartbugs
+It provides the following changes, predominantly for integration into [SmartBugs](https://github.com/smartbugs/smartbugs):
+- Migrated the inference endpoint's code to a Python script, `inference.py`, which can be directly executed and writes a JSON file as output to eliminate the overhead of running a full web server for testing each smart contract
+- Load solc version from an environment variable so it can be set externally
+- Improved exception handling
 - Frontend: In react app's package.json lock certain older dependencies of react-force-graph s.t `yarn start` does not end in an ECMAScript Error
 
 # Overview
