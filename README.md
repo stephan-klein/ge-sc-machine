@@ -22,6 +22,8 @@ Also in this branch, the HGT Model was activated by
 - uncommenting the prepared configuration in `utils.py` and replacing the paths to the relevant model snapshots in `config.py`
 - Fixing the implementation in `model_hgt.py` so that it does not crash when encountering an unknown edge type in the input graph
 
+Docker Image published at `deet0x/mando-hgt:0.1`
+
 # Overview
 This project was created to bring out the APIs of vulnerability detection for smart contracts based on heterogeneous graph embeddings.
 <p align="center">
