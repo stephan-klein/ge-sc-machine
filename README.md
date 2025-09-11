@@ -24,6 +24,24 @@ Also in this branch, the HGT Model was activated by
 
 Docker Image published at `deet0x/mando-hgt:0.1`
 
+Vulnerability detector can be started via `inference.sh`
+```
+usage: inference.py [-h] [-b BUGTYPES] [-v] [-t TIMEOUT] solidity_file
+
+Smart contract vulnerability detection
+
+positional arguments:
+  solidity_file         Path to the Solidity file to analyze
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -b BUGTYPES, --bugtypes BUGTYPES
+                        Comma separated list of bug types to check: access_control, arithmetic, denial_of_service, front_running, reentrancy, time_manipulation, unchecked_low_level_calls
+  -v, --verbose         Show verbose output with full details
+  -t TIMEOUT, --timeout TIMEOUT
+                        Timeout in seconds (default: 1800 - 30 minutes)
+```
+
 # Overview
 This project was created to bring out the APIs of vulnerability detection for smart contracts based on heterogeneous graph embeddings.
 <p align="center">
